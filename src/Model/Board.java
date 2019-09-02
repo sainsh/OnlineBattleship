@@ -1,10 +1,14 @@
 package Model;
 
 public class Board {
+    Cell[][] Board1;
+    Cell[][] Board2;
 
-    //Cell[][] Board
-    //Cell[][] ?????
+    public void setShipBoard1(Ship ship){}
 
-    //Update Board
-    //Update Board
+    public void setShipBoard2(Ship ship){}
+
+    public void shotBoard1(int x, int y){}
+
+    public void shotBoard2(int x, int y){}
 }
