@@ -1,8 +1,12 @@
 package Communication;
 
+import Model.Cell;
+import Model.Coordinate;
+
 public class MessageToClient {
 
-    Coordinate coordinate;
+    Cell shot;
+    boolean yourShot;
 
     boolean isShot = false;
     boolean isMessage = false;
@@ -15,20 +19,20 @@ public class MessageToClient {
 
     boolean isGameOver = false;
 
-    boolean setBoard;
-    Cell[][] board;
+
 
     boolean yourTurn;
+
 
     public MessageToClient() {
     }
 
-    public Coordinate getCoordinate() {
-        return coordinate;
+    public Cell getShot() {
+        return shot;
     }
 
-    public void setCoordinate(Coordinate coordinate) {
-        this.coordinate = coordinate;
+    public void setShot(Cell coordinate) {
+        this.shot = coordinate;
     }
 
     public boolean isShot() {
@@ -85,22 +89,6 @@ public class MessageToClient {
 
     public void setGameOver(boolean gameOver) {
         isGameOver = gameOver;
-    }
-
-    public boolean isSetBoard() {
-        return setBoard;
-    }
-
-    public void setSetBoard(boolean setBoard) {
-        this.setBoard = setBoard;
-    }
-
-    public Cell[][] getBoard() {
-        return board;
-    }
-
-    public void setBoard(Cell[][] board) {
-        this.board = board;
     }
 
     public boolean isYourTurn() {

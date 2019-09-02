@@ -3,33 +3,52 @@ package sample;
 import Communication.Connector;
 import Communication.MessageToClient;
 import Communication.MessageToServer;
+import Model.Board;
+import Model.Cell;
 import javafx.fxml.FXML;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 
 public class Controller {
 
-    Connector connector;
-    Thread thread;
+    private Connector connector;
+    private Thread thread;
 
-    int coordinateSize = 10;
-    int clickedX;
-    int clickedY;
+    private boolean yourTurn = false;
+
+    private int coordinateSize = 100;
+    private int clickedX;
+    private int clickedY;
 
     @FXML
     TextField chatText;
     @FXML
     TextArea chatHistoryText;
+    @FXML
+    Canvas enemyBoard;
+    @FXML
+    Canvas playerBoard;
 
-    Board playerBoard;
-    Board enemyBoard;
+    GraphicsContext playerContext;
+    GraphicsContext enemyContext;
+
+    private Board board;
 
 
     @FXML
     public void initialize() {
+
+        board = new Board();
+        playerContext = playerBoard.getGraphicsContext2D();
+        enemyContext = enemyBoard.getGraphicsContext2D();
+        drawBoard();
+
         connector = new Connector(this);
         thread = new Thread(connector);
         thread.start();
@@ -38,16 +57,17 @@ public class Controller {
 
 
     public void onMouseClickedEnemyBoard(MouseEvent mouseEvent) {
-        if (mouseEvent.isPrimaryButtonDown()) {
-            clickedX = (int)mouseEvent.getX()/coordinateSize;
-            clickedY = (int)mouseEvent.getY()/coordinateSize;
+        if (mouseEvent.isPrimaryButtonDown() && yourTurn) {
+            clickedX = (int) mouseEvent.getX() / coordinateSize;
+            clickedY = (int) mouseEvent.getY() / coordinateSize;
 
 
             MessageToServer messageToServer = new MessageToServer();
 
             messageToServer.setShot(true);
-            messageToServer.setShot(enemyBoard.getCell(clickedX,clickedY));
+            messageToServer.setShot(board.getEnemyBoard()[clickedX][clickedY]);
             connector.send(messageToServer);
+            yourTurn = false;
 
         }
     }
@@ -69,16 +89,48 @@ public class Controller {
     }
 
     public void respondToMessage(MessageToClient messageToClient) {
-        if(messageToClient.isMessage()){
+        if (messageToClient.isMessage()) {
             chatHistoryText.appendText(messageToClient.getMessage() + "\n");
         }
 
-        if(messageToClient.isShot()){
+        if (messageToClient.isShot()) {
             draw(messageToClient);
         }
+
+        yourTurn = messageToClient.isYourTurn();
 
     }
 
     private void draw(MessageToClient messageToClient) {
+
+    }
+
+    private void drawBoard() {
+
+        for (Cell[] cells : board.getPlayerBoard()){
+            for (Cell cell: cells) {
+                System.out.println(cell.getCoordinate().getX()+ " " + cell.getCoordinate().getY());
+                if(cell.getShip() == null){
+                    playerContext.setFill(Color.BLUE);
+
+                }else{
+                    playerContext.setFill(Color.BLACK);
+                }
+                playerContext.fillRect(cell.getCoordinate().getX()*coordinateSize,cell.getCoordinate().getY()*coordinateSize,coordinateSize,coordinateSize);
+            }
+        }
+
+        for (Cell[] cells : board.getEnemyBoard()){
+            for (Cell cell: cells) {
+
+                if(cell.getShip() == null){
+                    enemyContext.setFill(Color.BLUE);
+
+                }else{
+                    enemyContext.setFill(Color.BLACK);
+                }
+                enemyContext.fillRect(cell.getCoordinate().getX()*coordinateSize,cell.getCoordinate().getY()*coordinateSize,coordinateSize,coordinateSize);
+            }
+        }
     }
 }

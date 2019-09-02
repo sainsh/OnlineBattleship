@@ -1,5 +1,7 @@
 package Communication;
 
+import Model.Cell;
+
 public class MessageToServer {
 
     boolean isChatMessage = false;
