@@ -3,7 +3,9 @@ package Communication;
 import Model.Cell;
 import Model.Coordinate;
 
-public class MessageToClient {
+import java.io.Serializable;
+
+public class MessageToClient implements Serializable {
 
     Cell shot;
     boolean yourShot;
