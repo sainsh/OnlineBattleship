@@ -4,6 +4,7 @@ public class Board {
     private Cell[][] board1;
     private Cell[][] board2;
 
+
     public void setShipBoard1(Ship ship){}
 
     public void setShipBoard2(Ship ship){}
@@ -28,18 +29,20 @@ public class Board {
 
     public Board() {
         Cell[][] cells = new Cell[5][5];
-
         for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < 4; j++) {
                 cells[i][j] = new Cell();
                 //Sets the coordinate to the position in the array
                 cells[i][j].setCoordinate(new Coordinate(i,j));
 
             }
         }
-
-        this.board1 = board1;
-        this.board2 = board2;
+        Ship ship = new Ship();
+        ship.setCoordinates();
+        cells[0][1].setShip(ship);
+        cells[0][0].setShip(ship);
+        this.board1 = cells;
+        this.board2 = cells;
     }
 
     public void setBoard1(Cell[][] board1) {
