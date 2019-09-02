@@ -8,6 +8,7 @@ import Model.Cell;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -32,9 +33,12 @@ public class Controller {
     @FXML
     TextArea chatHistoryText;
     @FXML
+    Label ServerMessageLabel;
+    @FXML
     Canvas enemyBoard;
     @FXML
     Canvas playerBoard;
+
 
     private GraphicsContext playerContext;
     private GraphicsContext enemyContext;
@@ -97,6 +101,9 @@ public class Controller {
 
         if (messageToClient.isShot()) {
             draw(messageToClient);
+        }
+        if(messageToClient.isChangeClientText()){
+            ServerMessageLabel.setText(messageToClient.getClientText());
         }
 
         yourTurn = messageToClient.isYourTurn();
