@@ -104,34 +104,26 @@ public class Controller {
 
     private void draw(MessageToClient messageToClient) {
 
-        if (!messageToClient.isYourShot()) {
+        switch (messageToClient.getShot().getStatus()) {
+            case 1: //not shot at
+                playerContext.setFill(Color.BLUE);
+                enemyContext.setFill(Color.BLUE);
+                break;
+            case 2: //miss
+                playerContext.setFill(Color.YELLOW);
+                enemyContext.setFill(Color.YELLOW);
+                break;
+            case 3: // hit on ship
+                playerContext.setFill(Color.RED);
+                enemyContext.setFill(Color.RED);
+                break;
+        }
 
-            switch (messageToClient.getShot().getStatus()) {
-                case 1:
-                    playerContext.setFill(Color.BLUE);
-                    break;
-                case 2:
-                    playerContext.setFill(Color.YELLOW);
-                    break;
-                case 3:
-                    playerContext.setFill(Color.RED);
-                    break;
-            }
+        if (!messageToClient.isYourShot()) {
 
             playerContext.fillRect(messageToClient.getShot().getCoordinate().getX()+2, messageToClient.getShot().getCoordinate().getY()+2, coordinateSize-2, coordinateSize-2);
 
         }else{
-            switch (messageToClient.getShot().getStatus()) {
-                case 1:
-                    enemyContext.setFill(Color.BLUE);
-                    break;
-                case 2:
-                    enemyContext.setFill(Color.YELLOW);
-                    break;
-                case 3:
-                    enemyContext.setFill(Color.RED);
-                    break;
-            }
 
             enemyContext.fillRect(messageToClient.getShot().getCoordinate().getX()+2, messageToClient.getShot().getCoordinate().getY()+2, coordinateSize-2, coordinateSize-2);
         }
