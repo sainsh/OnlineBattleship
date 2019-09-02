@@ -16,11 +16,13 @@ public class Cell {
     }
 
     public int getStatus() {
+        if (coordinate.isHit()){
         if (ship != null){
             setStatus(3);
         }
         else
             setStatus(2);
+        }
         return Status;
     }
 
