@@ -1,8 +1,8 @@
 package Model;
 
 public class Board {
-    Cell[][] Board1;
-    Cell[][] Board2;
+    private Cell[][] Board1;
+    private Cell[][] Board2;
 
     public void setShipBoard1(Ship ship){}
 
@@ -11,4 +11,20 @@ public class Board {
     public void shotBoard1(int x, int y){}
 
     public void shotBoard2(int x, int y){}
+
+    public Cell[][] getBoard1() {
+        return Board1;
+    }
+
+    public void setBoard1(Cell[][] board1) {
+        Board1 = board1;
+    }
+
+    public Cell[][] getBoard2() {
+        return Board2;
+    }
+
+    public void setBoard2(Cell[][] board2) {
+        Board2 = board2;
+    }
 }

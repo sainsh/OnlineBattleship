@@ -2,9 +2,9 @@ package Model;
 
 public class Coordinate {
 
-    int x;
-    int y;
-    boolean isHit;
+    private int x;
+    private int y;
+    private boolean isHit;
 
     public Coordinate(int x, int y, boolean isHit) {
         this.x = x;
