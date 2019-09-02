@@ -4,12 +4,11 @@ public class Coordinate {
 
     private int x;
     private int y;
-    private boolean isHit;
+    private boolean isHit = false;
 
-    public Coordinate(int x, int y, boolean isHit) {
+    public Coordinate(int x, int y) {
         this.x = x;
         this.y = y;
-        this.isHit = isHit;
     }
 
     public int getX() {

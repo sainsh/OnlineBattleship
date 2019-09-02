@@ -26,6 +26,22 @@ public class Board {
         return board1;
     }
 
+    public Board() {
+        Cell[][] cells = new Cell[5][5];
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 5; j++) {
+                cells[i][j] = new Cell();
+                //Sets the coordinate to the position in the array
+                cells[i][j].setCoordinate(new Coordinate(i,j));
+
+            }
+        }
+
+        this.board1 = board1;
+        this.board2 = board2;
+    }
+
     public void setBoard1(Cell[][] board1) {
         this.board1 = board1;
     }
