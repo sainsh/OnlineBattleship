@@ -21,9 +21,9 @@ public class Controller {
     private Connector connector;
     private Thread thread;
 
-    private boolean yourTurn = false;
+    private boolean yourTurn = true;
 
-    private int coordinateSize = 100;
+    private int coordinateSize = 90;
     private int clickedX;
     private int clickedY;
 
@@ -61,6 +61,7 @@ public class Controller {
         if (mouseEvent.getButton() == MouseButton.PRIMARY && yourTurn) {
             clickedX = (int) mouseEvent.getX() / coordinateSize;
             clickedY = (int) mouseEvent.getY() / coordinateSize;
+            System.out.println(clickedX + " " + clickedY);
 
 
             MessageToServer messageToServer = new MessageToServer();
