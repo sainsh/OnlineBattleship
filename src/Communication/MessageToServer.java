@@ -8,12 +8,8 @@ public class MessageToServer {
     Cell shot;
     String sender;
 
-    public MessageToServer(boolean isChatMessage, boolean isShot, String chatMessage, Cell shot, String sender) {
-        this.isChatMessage = isChatMessage;
-        this.isShot = isShot;
-        this.chatMessage = chatMessage;
-        this.shot = shot;
-        this.sender = sender;
+    public MessageToServer() {
+
     }
 
     public boolean isChatMessage() {
