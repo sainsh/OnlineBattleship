@@ -22,7 +22,7 @@ public class Controller {
     private Connector connector;
     private Thread thread;
 
-    private boolean yourTurn = true;
+    private boolean yourTurn = false;
 
     private int coordinateSize = 90;
     private int clickedX;
