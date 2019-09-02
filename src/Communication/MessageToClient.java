@@ -98,4 +98,12 @@ public class MessageToClient {
     public void setYourTurn(boolean yourTurn) {
         this.yourTurn = yourTurn;
     }
+
+    public boolean isYourShot() {
+        return yourShot;
+    }
+
+    public void setYourShot(boolean yourShot) {
+        this.yourShot = yourShot;
+    }
 }

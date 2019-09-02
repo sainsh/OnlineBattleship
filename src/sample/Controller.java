@@ -12,6 +12,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
@@ -35,8 +36,8 @@ public class Controller {
     @FXML
     Canvas playerBoard;
 
-    GraphicsContext playerContext;
-    GraphicsContext enemyContext;
+    private GraphicsContext playerContext;
+    private GraphicsContext enemyContext;
 
     private Board board;
 
@@ -57,7 +58,7 @@ public class Controller {
 
 
     public void onMouseClickedEnemyBoard(MouseEvent mouseEvent) {
-        if (mouseEvent.isPrimaryButtonDown() && yourTurn) {
+        if (mouseEvent.getButton() == MouseButton.PRIMARY && yourTurn) {
             clickedX = (int) mouseEvent.getX() / coordinateSize;
             clickedY = (int) mouseEvent.getY() / coordinateSize;
 
@@ -103,33 +104,73 @@ public class Controller {
 
     private void draw(MessageToClient messageToClient) {
 
+        if (!messageToClient.isYourShot()) {
+
+            switch (messageToClient.getShot().getStatus()) {
+                case 1:
+                    playerContext.setFill(Color.BLUE);
+                    break;
+                case 2:
+                    playerContext.setFill(Color.YELLOW);
+                    break;
+                case 3:
+                    playerContext.setFill(Color.RED);
+                    break;
+            }
+
+            playerContext.fillRect(messageToClient.getShot().getCoordinate().getX()+2, messageToClient.getShot().getCoordinate().getY()+2, coordinateSize-2, coordinateSize-2);
+
+        }else{
+            switch (messageToClient.getShot().getStatus()) {
+                case 1:
+                    enemyContext.setFill(Color.BLUE);
+                    break;
+                case 2:
+                    enemyContext.setFill(Color.YELLOW);
+                    break;
+                case 3:
+                    enemyContext.setFill(Color.RED);
+                    break;
+            }
+
+            enemyContext.fillRect(messageToClient.getShot().getCoordinate().getX()+2, messageToClient.getShot().getCoordinate().getY()+2, coordinateSize-2, coordinateSize-2);
+        }
     }
 
     private void drawBoard() {
 
-        for (Cell[] cells : board.getPlayerBoard()){
-            for (Cell cell: cells) {
-                System.out.println(cell.getCoordinate().getX()+ " " + cell.getCoordinate().getY());
-                if(cell.getShip() == null){
+        for (Cell[] cells : board.getPlayerBoard()) {
+            for (Cell cell : cells) {
+
+                playerContext.setFill(Color.WHITE);
+
+                playerContext.fillRect(cell.getCoordinate().getX() * coordinateSize, cell.getCoordinate().getY() * coordinateSize, coordinateSize, coordinateSize);
+
+                if (cell.getShip() == null) {
                     playerContext.setFill(Color.BLUE);
 
-                }else{
+                } else {
                     playerContext.setFill(Color.BLACK);
                 }
-                playerContext.fillRect(cell.getCoordinate().getX()*coordinateSize,cell.getCoordinate().getY()*coordinateSize,coordinateSize,coordinateSize);
+                playerContext.fillRect(cell.getCoordinate().getX() * coordinateSize + 2, cell.getCoordinate().getY() * coordinateSize + 2, coordinateSize - 2, coordinateSize - 2);
             }
         }
 
-        for (Cell[] cells : board.getEnemyBoard()){
-            for (Cell cell: cells) {
+        for (Cell[] cells : board.getEnemyBoard()) {
+            for (Cell cell : cells) {
 
-                if(cell.getShip() == null){
+                enemyContext.setFill(Color.WHITE);
+
+                enemyContext.fillRect(cell.getCoordinate().getX() * coordinateSize, cell.getCoordinate().getY() * coordinateSize, coordinateSize, coordinateSize);
+
+                if (cell.getShip() == null) {
                     enemyContext.setFill(Color.BLUE);
 
-                }else{
+                } else {
                     enemyContext.setFill(Color.BLACK);
                 }
-                enemyContext.fillRect(cell.getCoordinate().getX()*coordinateSize,cell.getCoordinate().getY()*coordinateSize,coordinateSize,coordinateSize);
+                enemyContext.fillRect(cell.getCoordinate().getX() * coordinateSize + 2, cell.getCoordinate().getY() * coordinateSize + 2, coordinateSize - 2, coordinateSize - 2);
+
             }
         }
     }
