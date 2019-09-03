@@ -9,7 +9,7 @@ import java.net.Socket;
 
 public class Connector implements Runnable {
 
-    private Controller controller;
+    private ConnectorListener listener;
     MessageToClient messageToClient;
 
 
@@ -22,8 +22,12 @@ public class Connector implements Runnable {
 
     Object inputObject;
 
-    public Connector(Controller controller){
-        this.controller = controller;
+    public interface ConnectorListener{
+        void respondToMessage(MessageToClient messageToClient);
+    }
+
+    public Connector(ConnectorListener listener){
+        this.listener = listener;
     }
 
 
@@ -40,8 +44,9 @@ public class Connector implements Runnable {
 
                 inputObject = in.readObject();
                 if(inputObject.getClass() == MessageToClient.class){
+                    System.out.println("Message Received");
                     messageToClient = (MessageToClient) inputObject;
-                    controller.respondToMessage(messageToClient);
+                    listener.respondToMessage(messageToClient);
 
                 }
 

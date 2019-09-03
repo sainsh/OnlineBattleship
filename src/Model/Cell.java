@@ -1,6 +1,8 @@
 package Model;
 
-public class Cell {
+import java.io.Serializable;
+
+public class Cell implements Serializable {
     private Coordinate coordinate;
 
     //Status 1 is not hit, status 2 is hit, status 3 is hit with a ship on it.

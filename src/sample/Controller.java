@@ -5,6 +5,7 @@ import Communication.MessageToClient;
 import Communication.MessageToServer;
 import Model.Board;
 import Model.Cell;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -17,7 +18,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
-public class Controller {
+public class Controller implements Connector.ConnectorListener {
 
     private Connector connector;
     private Thread thread;
@@ -103,7 +104,14 @@ public class Controller {
             draw(messageToClient);
         }
         if(messageToClient.isChangeClientText()){
-            ServerMessageLabel.setText(messageToClient.getClientText());
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    ServerMessageLabel.setText(messageToClient.getClientText());
+                }
+            };
+            Platform.runLater(runnable);
+
         }
 
         yourTurn = messageToClient.isYourTurn();

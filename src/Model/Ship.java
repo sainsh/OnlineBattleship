@@ -1,6 +1,8 @@
 package Model;
 
-public class Ship {
+import java.io.Serializable;
+
+public class Ship implements Serializable {
 
     public Coordinate coordinate = new Coordinate(0,0);
     public Coordinate coordinate2 = new Coordinate(0,1);
