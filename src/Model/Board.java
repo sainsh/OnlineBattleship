@@ -41,8 +41,6 @@ public class Board implements Serializable {
         }
         Ship ship = new Ship();
         ship.setCoordinates();
-        cells[0][1].setShip(ship);
-        cells[0][0].setShip(ship);
         this.playerBoard = cells;
         this.enemyBoard = cells;
     }

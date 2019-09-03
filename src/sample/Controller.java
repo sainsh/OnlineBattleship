@@ -6,6 +6,7 @@ import Communication.MessageToServer;
 import Model.Board;
 import Model.Cell;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -181,5 +182,10 @@ public class Controller implements Connector.ConnectorListener {
 
             }
         }
+    }
+
+    @FXML
+    public void exitApplication(ActionEvent event){
+        connector.closeConnection();
     }
 }
