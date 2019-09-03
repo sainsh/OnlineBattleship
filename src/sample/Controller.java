@@ -137,11 +137,11 @@ public class Controller implements Connector.ConnectorListener {
 
         if (!messageToClient.isYourShot()) {
 
-            playerContext.fillRect(messageToClient.getShot().getCoordinate().getX()+2, messageToClient.getShot().getCoordinate().getY()+2, coordinateSize-2, coordinateSize-2);
+            playerContext.fillRect(messageToClient.getShot().getCoordinate().getX()*coordinateSize + 2 , messageToClient.getShot().getCoordinate().getY()*coordinateSize+2, coordinateSize-2, coordinateSize-2);
 
         }else{
 
-            enemyContext.fillRect(messageToClient.getShot().getCoordinate().getX()+2, messageToClient.getShot().getCoordinate().getY()+2, coordinateSize-2, coordinateSize-2);
+            enemyContext.fillRect(messageToClient.getShot().getCoordinate().getX()*coordinateSize+2, messageToClient.getShot().getCoordinate().getY()*coordinateSize+2, coordinateSize-2, coordinateSize-2);
         }
     }
 
