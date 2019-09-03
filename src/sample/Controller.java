@@ -90,15 +90,17 @@ public class Controller implements Connector.ConnectorListener {
         MessageToServer messageToServer = new MessageToServer();
         messageToServer.setChatMessage(true);
         messageToServer.setChatMessage(chatText.getText());
-        chatHistoryText.appendText(chatText.getText() + "\n");
         chatText.setText("");
 
         connector.send(messageToServer);
     }
 
     public void respondToMessage(MessageToClient messageToClient) {
+        System.out.println(messageToClient.isChangeClientText());
         if (messageToClient.isMessage()) {
             chatHistoryText.appendText(messageToClient.getMessage() + "\n");
+        }else{
+            yourTurn = messageToClient.isYourTurn();
         }
 
         if (messageToClient.isShot()) {
@@ -114,8 +116,6 @@ public class Controller implements Connector.ConnectorListener {
             Platform.runLater(runnable);
 
         }
-
-        yourTurn = messageToClient.isYourTurn();
 
     }
 
