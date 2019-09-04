@@ -115,7 +115,7 @@ public class Controller implements Connector.ConnectorListener {
             Platform.runLater(runnable);
 
         }
-        if (messageToClient.hasBoard()) {
+        if (messageToClient.isHasBoard()) {
             drawBoard(messageToClient.getBoard());
         }
 
