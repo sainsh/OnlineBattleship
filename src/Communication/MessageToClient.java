@@ -7,37 +7,40 @@ import java.io.Serializable;
 
 public class MessageToClient implements Serializable {
 
-    Cell shot;
-    boolean yourShot;
+   private boolean yourShot;
 
-    boolean isShot = false;
-    boolean isMessage = false;
+    private boolean isShot = false;
+    private boolean isMessage = false;
 
-    String message;
-    String sender;
+    private String message;
+    private String sender;
 
-    String clientText;
-    boolean changeClientText = false;
+    private String clientText;
+    private boolean changeClientText = false;
 
-    boolean isGameOver = false;
+    private boolean isGameOver = false;
 
-    private Cell[][] board;
     private boolean hasBoard = false;
 
 
+    private boolean yourTurn;
 
-    boolean yourTurn;
-
+    private int x;
+    private int y;
+    private int staus;
+    private boolean shipSunken;
+    private int[] coordinate;
+    private int[][] board;
 
     public MessageToClient() {
     }
 
-    public Cell getShot() {
-        return shot;
+    public boolean isYourShot() {
+        return yourShot;
     }
 
-    public void setShot(Cell coordinate) {
-        this.shot = coordinate;
+    public void setYourShot(boolean yourShot) {
+        this.yourShot = yourShot;
     }
 
     public boolean isShot() {
@@ -96,6 +99,14 @@ public class MessageToClient implements Serializable {
         isGameOver = gameOver;
     }
 
+    public boolean isHasBoard() {
+        return hasBoard;
+    }
+
+    public void setHasBoard(boolean hasBoard) {
+        this.hasBoard = hasBoard;
+    }
+
     public boolean isYourTurn() {
         return yourTurn;
     }
@@ -104,28 +115,52 @@ public class MessageToClient implements Serializable {
         this.yourTurn = yourTurn;
     }
 
-    public boolean isYourShot() {
-        return yourShot;
+    public int getX() {
+        return x;
     }
 
-    public void setYourShot(boolean yourShot) {
-        this.yourShot = yourShot;
+    public void setX(int x) {
+        this.x = x;
     }
 
-    public Cell[][] getBoard() {
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getStaus() {
+        return staus;
+    }
+
+    public void setStaus(int staus) {
+        this.staus = staus;
+    }
+
+    public boolean isShipSunken() {
+        return shipSunken;
+    }
+
+    public void setShipSunken(boolean shipSunken) {
+        this.shipSunken = shipSunken;
+    }
+
+    public int[] getCoordinate() {
+        return coordinate;
+    }
+
+    public void setCoordinate(int[] coordinate) {
+        this.coordinate = coordinate;
+    }
+
+    public int[][] getBoard() {
         return board;
     }
 
-    public void setBoard(Cell[][] board) {
+    public void setBoard(int[][] board) {
         this.board = board;
-        hasBoard = true;
-    }
-
-    public boolean isHasBoard() {
-        return hasBoard;
-    }
-
-    public void setHasBoard(boolean hasBoard) {
-        this.hasBoard = hasBoard;
     }
 }
+
