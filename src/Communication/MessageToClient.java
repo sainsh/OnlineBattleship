@@ -21,6 +21,9 @@ public class MessageToClient implements Serializable {
 
     boolean isGameOver = false;
 
+    private Cell[][] board;
+    private boolean hasBoard = false;
+
 
 
     boolean yourTurn;
@@ -107,5 +110,22 @@ public class MessageToClient implements Serializable {
 
     public void setYourShot(boolean yourShot) {
         this.yourShot = yourShot;
+    }
+
+    public Cell[][] getBoard() {
+        return board;
+    }
+
+    public void setBoard(Cell[][] board) {
+        this.board = board;
+        hasBoard = true;
+    }
+
+    public boolean isHasBoard() {
+        return hasBoard;
+    }
+
+    public void setHasBoard(boolean hasBoard) {
+        this.hasBoard = hasBoard;
     }
 }
