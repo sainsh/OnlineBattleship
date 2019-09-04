@@ -46,7 +46,8 @@ public class Controller implements Connector.ConnectorListener {
 
     @FXML
     public void initialize() {
-
+        chatHistoryText.setWrapText(true);
+        coordinateSize = (int) playerBoard.getHeight() / 5;
         playerContext = playerBoard.getGraphicsContext2D();
         enemyContext = enemyBoard.getGraphicsContext2D();
 
@@ -98,7 +99,13 @@ public class Controller implements Connector.ConnectorListener {
         }
 
         if (messageToClient.isShot()) {
-            draw(messageToClient);
+            if (messageToClient.isShipSunken()) {
+                System.out.println("your shot: " + messageToClient.isYourShot());
+
+                drawSunkenShip(messageToClient.getCoordinate(), messageToClient.isYourShot());
+            } else {
+                draw(messageToClient);
+            }
         }
         if (messageToClient.isChangeClientText()) {
             Runnable runnable = new Runnable() {
@@ -113,6 +120,27 @@ public class Controller implements Connector.ConnectorListener {
         if (messageToClient.isHasBoard()) {
             drawBoard(messageToClient.getBoard());
         }
+
+    }
+
+    private void drawSunkenShip(int[] coordinate, Boolean yourShot) {
+
+        if (yourShot) {
+            enemyContext.setFill(Color.PINK);
+            enemyContext.fillRect(coordinate[0] * coordinateSize + 2, coordinate[1] * coordinateSize + 2, coordinateSize - 2, coordinateSize - 2);
+            enemyContext.fillRect(coordinate[2] * coordinateSize + 2, coordinate[3] * coordinateSize + 2, coordinateSize - 2, coordinateSize - 2);
+            if (coordinate.length > 4) {
+                enemyContext.fillRect(coordinate[4] * coordinateSize + 2, coordinate[5] * coordinateSize + 2, coordinateSize - 2, coordinateSize - 2);
+            }
+        } else {
+            playerContext.setFill(Color.PINK);
+            playerContext.fillRect(coordinate[0] * coordinateSize + 2, coordinate[1] * coordinateSize + 2, coordinateSize - 2, coordinateSize - 2);
+            playerContext.fillRect(coordinate[2] * coordinateSize + 2, coordinate[3] * coordinateSize + 2, coordinateSize - 2, coordinateSize - 2);
+            if (coordinate.length > 4) {
+                playerContext.fillRect(coordinate[4] * coordinateSize + 2, coordinate[5] * coordinateSize + 2, coordinateSize - 2, coordinateSize - 2);
+            }
+        }
+
 
     }
 

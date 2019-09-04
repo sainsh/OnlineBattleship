@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="2000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
   <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="500.0" prefWidth="500.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="500.0" prefWidth="500.0" />
@@ -22,9 +22,9 @@
       <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Canvas fx:id="enemyBoard" height="500.0" onMouseClicked="#onMouseClickedEnemyBoard" width="500.0" GridPane.rowIndex="1" />
-      <Canvas fx:id="playerBoard" height="500.0" width="500.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <TextField fx:id="chatText" maxWidth="-Infinity" minWidth="200.0" onKeyReleased="#onKeyReleased" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+      <Canvas fx:id="enemyBoard" height="500.0" onMouseClicked="#onMouseClickedEnemyBoard" width="500.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Canvas fx:id="playerBoard" height="500.0" width="500.0" GridPane.rowIndex="1" />
+      <TextField fx:id="chatText" maxWidth="-Infinity" minWidth="-Infinity" onKeyReleased="#onKeyReleased" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
       <TextArea fx:id="chatHistoryText" disable="true" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="TOP" />
       <Label fx:id="ServerMessageLabel" text="Message from server" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
       <Button fx:id="sendBTN" mnemonicParsing="false" onAction="#send" text="Send" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
