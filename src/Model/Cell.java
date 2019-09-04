@@ -6,7 +6,7 @@ public class Cell implements Serializable {
     private Coordinate coordinate;
 
     //Status 1 is not hit, status 2 is hit, status 3 is hit with a ship on it.
-    private int Status = 1;
+    private int status = 1;
     private Ship ship;
 
     public Coordinate getCoordinate() {
@@ -18,18 +18,17 @@ public class Cell implements Serializable {
     }
 
     public int getStatus() {
-        if (coordinate.isHit()){
-        if (ship != null){
-            setStatus(3);
-        }
-        else
-            setStatus(2);
-        }
-        return Status;
+        return status;
     }
 
-    public void setStatus(int status) {
-        Status = status;
+    public void setStatus() {
+        if (coordinate.isHit()){
+            if (ship != null){
+                status = 3;
+            }
+            else
+                status = 2;
+        }
     }
 
     public Ship getShip() {

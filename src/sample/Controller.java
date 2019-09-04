@@ -122,7 +122,7 @@ public class Controller implements Connector.ConnectorListener {
     }
 
     private void draw(MessageToClient messageToClient) {
-
+        System.out.println(messageToClient.getShot().getStatus());
         switch (messageToClient.getShot().getStatus()) {
             case 1: //not shot at
                 playerContext.setFill(Color.BLUE);
