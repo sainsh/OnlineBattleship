@@ -3,7 +3,6 @@ package sample;
 import Communication.Connector;
 import Communication.MessageToClient;
 import Communication.MessageToServer;
-import Model.Board;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,13 +43,11 @@ public class Controller implements Connector.ConnectorListener {
     private GraphicsContext playerContext;
     private GraphicsContext enemyContext;
 
-    private Board board;
 
 
     @FXML
     public void initialize() {
 
-        board = new Board();
         playerContext = playerBoard.getGraphicsContext2D();
         enemyContext = enemyBoard.getGraphicsContext2D();
 
@@ -159,7 +156,7 @@ public class Controller implements Connector.ConnectorListener {
                 } else {
                     playerContext.setFill(Color.BLUE);
                 }
-                playerContext.fillRect(x * coordinateSize - 2, y * coordinateSize - 2, coordinateSize + 2, coordinateSize + 2);
+                playerContext.fillRect(x * coordinateSize + 2, y * coordinateSize + 2, coordinateSize - 2, coordinateSize - 2);
 
                 enemyContext.setFill(Color.WHITE);
                 enemyContext.fillRect(x * coordinateSize, y * coordinateSize, coordinateSize, coordinateSize);

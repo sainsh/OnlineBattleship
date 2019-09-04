@@ -1,13 +1,10 @@
 package Communication;
 
-import Model.Cell;
-import Model.Coordinate;
-
 import java.io.Serializable;
 
 public class MessageToClient implements Serializable {
 
-   private boolean yourShot;
+    private boolean yourShot;
 
     private boolean isShot = false;
     private boolean isMessage = false;
@@ -135,8 +132,8 @@ public class MessageToClient implements Serializable {
         return status;
     }
 
-    public void setStaus(int staus) {
-        this.status = staus;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public boolean isShipSunken() {
