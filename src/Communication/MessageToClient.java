@@ -10,7 +10,6 @@ public class MessageToClient implements Serializable {
     private boolean isMessage = false;
 
     private String message;
-    private String sender;
 
     private String clientText;
     private boolean changeClientText = false;
@@ -62,14 +61,6 @@ public class MessageToClient implements Serializable {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public String getSender() {
-        return sender;
-    }
-
-    public void setSender(String sender) {
-        this.sender = sender;
     }
 
     public String getClientText() {

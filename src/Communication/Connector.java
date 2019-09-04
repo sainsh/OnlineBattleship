@@ -1,7 +1,5 @@
 package Communication;
 
-import sample.Controller;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -44,7 +42,6 @@ public class Connector implements Runnable {
 
                 inputObject = in.readObject();
                 if(inputObject.getClass() == MessageToClient.class){
-                    System.out.println("Message Received");
                     messageToClient = (MessageToClient) inputObject;
                     listener.respondToMessage(messageToClient);
 

@@ -44,7 +44,6 @@ public class Controller implements Connector.ConnectorListener {
     private GraphicsContext enemyContext;
 
 
-
     @FXML
     public void initialize() {
 
@@ -62,7 +61,6 @@ public class Controller implements Connector.ConnectorListener {
         if (mouseEvent.getButton() == MouseButton.PRIMARY && yourTurn) {
             clickedX = (int) mouseEvent.getX() / coordinateSize;
             clickedY = (int) mouseEvent.getY() / coordinateSize;
-            System.out.println(clickedX + " " + clickedY);
 
 
             MessageToServer messageToServer = new MessageToServer();
@@ -92,7 +90,7 @@ public class Controller implements Connector.ConnectorListener {
     }
 
     public void respondToMessage(MessageToClient messageToClient) {
-        System.out.println(messageToClient.isChangeClientText());
+
         if (messageToClient.isMessage()) {
             chatHistoryText.appendText(messageToClient.getMessage() + "\n");
         } else {
@@ -119,7 +117,6 @@ public class Controller implements Connector.ConnectorListener {
     }
 
     private void draw(MessageToClient messageToClient) {
-        System.out.println(messageToClient.getStatus());
         switch (messageToClient.getStatus()) {
             case 1: //not shot at
                 playerContext.setFill(Color.BLUE);

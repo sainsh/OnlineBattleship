@@ -13,7 +13,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("clientView.fxml"));
         primaryStage.setTitle("Sænk et Slagskib");
-        primaryStage.setScene(new Scene(root, 700, 700));
+        primaryStage.setScene(new Scene(root, 1300, 650));
         primaryStage.show();
     }
 
