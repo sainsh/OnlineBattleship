@@ -54,7 +54,6 @@ public class Controller implements Connector.ConnectorListener {
         board = new Board();
         playerContext = playerBoard.getGraphicsContext2D();
         enemyContext = enemyBoard.getGraphicsContext2D();
-        drawBoard();
 
         connector = new Connector(this);
         thread = new Thread(connector);
@@ -99,14 +98,14 @@ public class Controller implements Connector.ConnectorListener {
         System.out.println(messageToClient.isChangeClientText());
         if (messageToClient.isMessage()) {
             chatHistoryText.appendText(messageToClient.getMessage() + "\n");
-        }else{
+        } else {
             yourTurn = messageToClient.isYourTurn();
         }
 
         if (messageToClient.isShot()) {
             draw(messageToClient);
         }
-        if(messageToClient.isChangeClientText()){
+        if (messageToClient.isChangeClientText()) {
             Runnable runnable = new Runnable() {
                 @Override
                 public void run() {
@@ -115,6 +114,9 @@ public class Controller implements Connector.ConnectorListener {
             };
             Platform.runLater(runnable);
 
+        }
+        if (messageToClient.hasBoard()) {
+            drawBoard(messageToClient.getBoard());
         }
 
     }
@@ -138,17 +140,17 @@ public class Controller implements Connector.ConnectorListener {
 
         if (!messageToClient.isYourShot()) {
 
-            playerContext.fillRect(messageToClient.getShot().getCoordinate().getX()*coordinateSize + 2 , messageToClient.getShot().getCoordinate().getY()*coordinateSize+2, coordinateSize-2, coordinateSize-2);
+            playerContext.fillRect(messageToClient.getShot().getCoordinate().getX() * coordinateSize + 2, messageToClient.getShot().getCoordinate().getY() * coordinateSize + 2, coordinateSize - 2, coordinateSize - 2);
 
-        }else{
+        } else {
 
-            enemyContext.fillRect(messageToClient.getShot().getCoordinate().getX()*coordinateSize+2, messageToClient.getShot().getCoordinate().getY()*coordinateSize+2, coordinateSize-2, coordinateSize-2);
+            enemyContext.fillRect(messageToClient.getShot().getCoordinate().getX() * coordinateSize + 2, messageToClient.getShot().getCoordinate().getY() * coordinateSize + 2, coordinateSize - 2, coordinateSize - 2);
         }
     }
 
-    private void drawBoard() {
+    private void drawBoard(Cell[][] board) {
 
-        for (Cell[] cells : board.getPlayerBoard()) {
+        for (Cell[] cells : board) {
             for (Cell cell : cells) {
 
                 playerContext.setFill(Color.WHITE);
@@ -165,19 +167,13 @@ public class Controller implements Connector.ConnectorListener {
             }
         }
 
-        for (Cell[] cells : board.getEnemyBoard()) {
+        enemyContext.setFill(Color.BLUE);
+
+        for (Cell[] cells : board) {
             for (Cell cell : cells) {
-
                 enemyContext.setFill(Color.WHITE);
-
                 enemyContext.fillRect(cell.getCoordinate().getX() * coordinateSize, cell.getCoordinate().getY() * coordinateSize, coordinateSize, coordinateSize);
-
-                if (cell.getShip() == null) {
-                    enemyContext.setFill(Color.BLUE);
-
-                } else {
-                    enemyContext.setFill(Color.BLACK);
-                }
+                enemyContext.setFill(Color.BLUE);
                 enemyContext.fillRect(cell.getCoordinate().getX() * coordinateSize + 2, cell.getCoordinate().getY() * coordinateSize + 2, coordinateSize - 2, coordinateSize - 2);
 
             }
@@ -185,7 +181,7 @@ public class Controller implements Connector.ConnectorListener {
     }
 
     @FXML
-    public void exitApplication(ActionEvent event){
+    public void exitApplication(ActionEvent event) {
         connector.closeConnection();
     }
 }
