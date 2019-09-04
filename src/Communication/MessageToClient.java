@@ -27,7 +27,7 @@ public class MessageToClient implements Serializable {
 
     private int x;
     private int y;
-    private int staus;
+    private int status;
     private boolean shipSunken;
     private int[] coordinate;
     private int[][] board;
@@ -131,12 +131,12 @@ public class MessageToClient implements Serializable {
         this.y = y;
     }
 
-    public int getStaus() {
-        return staus;
+    public int getStatus() {
+        return status;
     }
 
     public void setStaus(int staus) {
-        this.staus = staus;
+        this.status = staus;
     }
 
     public boolean isShipSunken() {
