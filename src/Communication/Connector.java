@@ -8,17 +8,17 @@ import java.net.Socket;
 public class Connector implements Runnable {
 
     private ConnectorListener listener;
-    MessageToClient messageToClient;
+    private MessageToClient messageToClient;
 
 
-    String host = "localhost";
-    int port = 8000;
+    private String host = "localhost";
+    private int port = 8000;
 
-    Socket socket;
-    ObjectOutputStream out;
-    ObjectInputStream in;
+    private Socket socket;
+    private ObjectOutputStream out;
+    private ObjectInputStream in;
 
-    Object inputObject;
+    private Object inputObject;
 
     public interface ConnectorListener{
         void respondToMessage(MessageToClient messageToClient);
